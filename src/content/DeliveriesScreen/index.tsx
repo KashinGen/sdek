@@ -57,11 +57,13 @@ export const DeliveriesScreen: React.FC<DeliveriesScreenProps> = ({
         <DeliveryTable deliveries={deliveries} isLoading={isLoading} />
       </div>
       <div className="mt-4">
-        <Pagination
-          currentPage={page}
-          onPageChange={setPage}
-          totalPages={totalPages}
-        />
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={page}
+            onPageChange={setPage}
+            totalPages={totalPages}
+          />
+        )}
       </div>
     </div>
   );

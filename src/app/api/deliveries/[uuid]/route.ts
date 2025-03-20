@@ -7,14 +7,14 @@ const dataPath = path.join(process.cwd(), 'mockData.json');
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { uid: string } },
+  { params }: { params: { uuid: string } },
 ) {
   try {
     const jsonData: DeliveryResponse = JSON.parse(
       fs.readFileSync(dataPath, 'utf8'),
     );
 
-    const delivery = jsonData.items.find(item => item.uuid === params.uid);
+    const delivery = jsonData.items.find(item => item.uuid === params.uuid);
 
     if (!delivery) {
       return NextResponse.json(

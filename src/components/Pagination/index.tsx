@@ -1,5 +1,3 @@
-// components/Pagination.tsx
-
 import React from 'react';
 
 interface PaginationProps {
@@ -27,7 +25,6 @@ const Pagination: React.FC<PaginationProps> = ({
   `;
 
   if (totalPages < 1 || currentPage < 1 || currentPage > totalPages) {
-    console.error('Invalid pagination props');
     return null;
   }
 

@@ -16,7 +16,6 @@ export async function GET(request: NextRequest) {
 
     const status = request.nextUrl.searchParams.get('status');
     const page = parseInt(request.nextUrl.searchParams.get('page') || '1', 10);
-    console.log(page);
     if (status) {
       filteredDeliveries = filteredDeliveries.filter(
         delivery =>
@@ -36,6 +35,9 @@ export async function GET(request: NextRequest) {
       pagination: {
         currentPage: page,
         totalPages: totalPages,
+      },
+      headers: {
+        'Cache-Control': 'no-store, max-age=100',
       },
     });
   } catch (error) {

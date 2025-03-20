@@ -7,3 +7,8 @@ declare module '*.svg' {
 
   export default ReactComponent;
 }
+
+declare module '*.svg' {
+  const content: string;
+  export default content;
+}

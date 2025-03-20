@@ -5,11 +5,6 @@ import { Metadata } from 'next';
 
 export const revalidate = 60;
 
-interface DeliveriesPageProps {
-  status?: string;
-  page?: string;
-}
-
 export const metadata: Metadata = {
   title: 'Deliveries',
   description: 'List of all deliveries with filtering and pagination',
@@ -20,9 +15,11 @@ export const metadata: Metadata = {
  * Fetches initial data and renders the DeliveriesScreen component.
  * @param searchParams - Query parameters for filtering and pagination
  */
-export default async function DeliveriesPage(
-  searchParams: Promise<DeliveriesPageProps>,
-) {
+export default async function DeliveriesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
   const params = await searchParams;
   const status = params.status || '';
   const page = parseInt(params.page || '1', 10);
@@ -36,7 +33,7 @@ export default async function DeliveriesPage(
       <DeliveriesScreen
         initialDeliveries={deliveriesResponse.items ?? []}
         initialStatus={status}
-        initialPage={page}
+        initialPage={deliveriesResponse.pagination.currentPage}
         totalPages={deliveriesResponse.pagination.totalPages}
         statuses={statuses}
       />

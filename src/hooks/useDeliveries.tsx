@@ -8,7 +8,7 @@ import { useFilterQuery } from './useFilterQuery';
  * @param initialDeliveries - Initial list of deliveries
  * @param initialStatus - Initial status filter
  * @param initialPage - Initial page number
- * @param total- Total page number
+ * @param total - Total page number
  * @returns Object containing deliveries state and management functions
  */
 
@@ -29,12 +29,10 @@ export function useDeliveries(
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      console.log('p', page);
       const response = await fetchDeliveries(page, status);
       setDeliveries(response.items);
       setTotalPages(response.pagination.totalPages);
-    } catch (error) {
-      console.error('Failed to fetch deliveries:', error);
+    } catch {
       setError('Failed to load deliveries. Please try again.');
     } finally {
       setIsLoading(false);
@@ -42,8 +40,10 @@ export function useDeliveries(
   };
 
   useEffect(() => {
-    fetchData();
-  }, [status, page]);
+    if (status !== initialStatus || page !== initialPage) {
+      fetchData();
+    }
+  }, [status, page, initialStatus, initialPage]);
 
   const handleStatusChange = (newStatus: string) => {
     setStatus(newStatus);

@@ -1431,7 +1431,7 @@
       "related_entities": []
     },
     {
-      "uuid": "f1d45fd9-0a0c-4c1a-b704-d32adcaa5fe5",
+      "uuid": "f1d45fd9-0a0c-4c1a-b704-d32adcaa5fe8",
       "type": 1,
       "is_return": false,
       "is_reverse": false,
@@ -1545,6 +1545,12 @@
         {
           "code": "ACCEPTED",
           "name": "Принят",
+          "date_time": "2025-02-14T08:02:36+0000",
+          "city": "Офис СДЭК"
+        },
+        {
+          "code": "CANCELED",
+          "name": "Отменен",
           "date_time": "2025-02-14T08:02:36+0000",
           "city": "Офис СДЭК"
         }
@@ -2615,8 +2621,8 @@
           "city": "Офис СДЭК"
         },
         {
-          "code": "CANCELED",
-          "name": "Отменен",
+          "code": "DELIVERED",
+          "name": "Доставлен",
           "date_time": "2025-02-14T08:02:36+0000",
           "city": "Офис СДЭК"
         }
@@ -3689,6 +3695,12 @@
         {
           "code": "CREATED",
           "name": "Создан",
+          "date_time": "2025-02-14T08:02:36+0000",
+          "city": "Офис СДЭК"
+        },
+        {
+          "code": "DELIVERED",
+          "name": "Доставлен",
           "date_time": "2025-02-14T08:02:36+0000",
           "city": "Офис СДЭК"
         }
