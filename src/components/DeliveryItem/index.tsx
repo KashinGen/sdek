@@ -1,9 +1,8 @@
-'use client'
+'use client';
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Delivery } from '../../types';
 import { formatDate } from '../../utils/formatDate';
-import AddressIcon from '@/assets/icons/address.svg';
 import Address from '../Address';
 
 interface Props {
@@ -12,30 +11,40 @@ interface Props {
 
 const getStatusColor = (code: string) => {
   switch (code) {
-    case 'DELIVERED': return 'bg-green-100 text-green-800';
-    case 'IN_TRANSIT': return 'bg-yellow-100 text-yellow-800';
-    default: return 'bg-gray-100 text-gray-800';
+    case 'DELIVERED':
+      return 'bg-green-100 text-green-800';
+    case 'IN_TRANSIT':
+      return 'bg-yellow-100 text-yellow-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
   }
 };
 
 const DeliveryItem: React.FC<Props> = ({ delivery }) => {
   const router = useRouter();
-  const last_status = useMemo(() => delivery.statuses.length > 0 ? delivery.statuses[delivery.statuses.length - 1] : null, [delivery.statuses]);
+  const last_status = useMemo(
+    () =>
+      delivery.statuses.length > 0
+        ? delivery.statuses[delivery.statuses.length - 1]
+        : null,
+    [delivery.statuses],
+  );
 
   return (
     <tr className="bg-white border-b hover:bg-gray-50 transition duration-150 ease-in-out">
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-        {/* {delivery.uuid.slice(0, 8)}... */}
         {delivery.uuid}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {last_status && <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-         last_status.code === 'DELIVERED' ? 'bg-green-100 text-green-800' :
-         last_status.code === 'IN_TRANSIT' ? 'bg-yellow-100 text-yellow-800' :
-          'bg-gray-100 text-gray-800'
-        }`}>
-          {last_status.name}
-        </span>}
+        {last_status && (
+          <span
+            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
+              last_status.code,
+            )}`}
+          >
+            {last_status.name}
+          </span>
+        )}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {formatDate(delivery.statuses[0].date_time)}
@@ -44,7 +53,7 @@ const DeliveryItem: React.FC<Props> = ({ delivery }) => {
         <Address address={delivery.to_location.address} />
       </td>
       <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
-          <Address address={delivery.from_location.address} />
+        <Address address={delivery.from_location.address} />
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button

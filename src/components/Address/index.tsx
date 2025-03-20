@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useMemo } from 'react';
 import AddressIcon from '@/assets/icons/address.svg';
@@ -20,12 +20,14 @@ const Address: React.FC<AddressProps> = ({ address, maxLength = 30 }) => {
     const words = address.split(' ');
     const lastWord = words[words.length - 1];
     const availableLength = maxLength - lastWord.length - 3;
-    let shortened = address.slice(0, availableLength).trim();
+    const shortened = address.slice(0, availableLength).trim();
     return `${shortened}... ${lastWord}`;
   }, [address, maxLength]);
 
   return (
-    <div className="flex items-start w-64"> {/* Фиксированная ширина */}
+    <div className="flex items-start w-64">
+      {' '}
+      {/* Фиксированная ширина */}
       <AddressIcon className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0 mt-0.5" />
       <div className="relative flex-grow min-w-0 overflow-hidden">
         {!isExpanded ? (

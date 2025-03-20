@@ -10,7 +10,6 @@ export const fetchDeliveries = async (
   if (status) params.append('status', status);
   params.append('page', page.toString());
 
-
   const response = await fetch(`${API_URL}/deliveries?${params.toString()}`);
   if (!response.ok) {
     throw new Error('Failed to fetch deliveries');

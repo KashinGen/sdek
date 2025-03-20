@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Delivery } from '@/types';
 import { fetchDeliveries } from '@/services/api';
 import { useFilterQuery } from './useFilterQuery';
-
 
 /**
  * Hook for managing deliveries state, pagination, and filtering.
@@ -13,21 +12,24 @@ import { useFilterQuery } from './useFilterQuery';
  * @returns Object containing deliveries state and management functions
  */
 
-export function useDeliveries(initialDeliveries: Delivery[], initialStatus: string, initialPage: number, total: number) {
-
-  
+export function useDeliveries(
+  initialDeliveries: Delivery[],
+  initialStatus: string,
+  initialPage: number,
+  total: number,
+) {
   const [deliveries, setDeliveries] = useState<Delivery[]>(initialDeliveries);
   const [status, setStatus] = useState(initialStatus);
   const [page, setPage] = useState(initialPage);
   const [totalPages, setTotalPages] = useState(total);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  useFilterQuery(status, page)
+  useFilterQuery(status, page);
 
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      console.log('p',page)
+      console.log('p', page);
       const response = await fetchDeliveries(page, status);
       setDeliveries(response.items);
       setTotalPages(response.pagination.totalPages);
@@ -37,27 +39,16 @@ export function useDeliveries(initialDeliveries: Delivery[], initialStatus: stri
     } finally {
       setIsLoading(false);
     }
-  }
-
-  
-  
+  };
 
   useEffect(() => {
-      fetchData();
+    fetchData();
   }, [status, page]);
-
-
-  
-
 
   const handleStatusChange = (newStatus: string) => {
     setStatus(newStatus);
     setPage(1);
   };
-
- 
-
-
 
   return {
     deliveries,
@@ -67,6 +58,6 @@ export function useDeliveries(initialDeliveries: Delivery[], initialStatus: stri
     setPage,
     totalPages,
     isLoading,
-    error
+    error,
   };
 }
