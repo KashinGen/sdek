@@ -1,16 +1,9 @@
 import DeliveryDetails from '@/content/DeliveryDetail';
-import { fetchDeliveries, fetchDeliveryDetails } from '@/services/api';
+import { fetchDeliveryDetails } from '@/services/api';
 import { notFound } from 'next/navigation';
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const deliveries = await fetchDeliveries();
-
-  return deliveries.items.map(delivery => ({
-    uuid: delivery.uuid,
-  }));
-}
 
 /**
  * Page component for individual delivery details.

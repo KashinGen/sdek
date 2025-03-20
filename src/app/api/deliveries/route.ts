@@ -4,7 +4,7 @@ import path from 'path';
 import { DeliveryResponse } from '@/types';
 import { ITEMS_PER_PAGE } from '@/const';
 
-const dataPath = path.join(process.cwd(), 'mockData.json');
+const dataPath = path.join(process.cwd(), 'public', 'mockData.json');
 
 export async function GET(request: NextRequest) {
   try {
