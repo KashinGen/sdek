@@ -1,6 +1,5 @@
 'use client';
 import React, { useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import { Delivery } from '../../types';
 import { formatDate } from '../../utils/formatDate';
 import Address from '../Address';
@@ -22,7 +21,6 @@ const getStatusColor = (code: string) => {
 };
 
 const DeliveryItem: React.FC<Props> = ({ delivery }) => {
-  const router = useRouter();
   const last_status = useMemo(
     () =>
       delivery.statuses.length > 0
